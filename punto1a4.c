@@ -15,7 +15,7 @@ typedef struct Tarea ListaTask;
 void cargarTareas(ListaTask **Tareas, int cantidadTask);
 void mostrarTareas(ListaTask **Tareas, int cantidadTask);
 void marcarTareasRealizadas(ListaTask **TareasPendientes, ListaTask **TareasRealizadas, int cantidadTask);
-struct Tarea *BuscarTarea(ListaTask **Tareas, char *PalabraClave, int cantidadTask);
+struct Tarea *BusquedaPorPalabra(ListaTask **Tareas, char *PalabraClave, int cantidadTask);
 void mostrarTarea(struct Tarea *tarea);
 
 void main (){
@@ -33,7 +33,7 @@ void main (){
     mostrarTareas(TareasRealizadas, cantidadTask);
     printf("Tareas Pendientes: \n");
     mostrarTareas(TareasPendientes, cantidadTask);
-    tarea = BuscarTarea(TareasPendientes,"Comer",cantidadTask);
+    tarea = BuscarPorPalabra(TareasPendientes,"Comer",cantidadTask);
     mostrarTarea(tarea);
 }
 
@@ -92,7 +92,7 @@ void mostrarTareas(ListaTask **Tareas, int cantidadTask){
     }
 }
 
-struct Tarea *BuscarTarea(ListaTask **Tareas, char *PalabraClave, int cantidadTask){
+struct Tarea *BusquedaPorPalabra(ListaTask **Tareas, char *PalabraClave, int cantidadTask){
     for(int i=0;i<cantidadTask;i++)
     {
         if(strcmp(Tareas[i]->Descripcion,PalabraClave)==0){
