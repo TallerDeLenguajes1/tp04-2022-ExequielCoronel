@@ -15,10 +15,12 @@ typedef struct Tarea ListaTask;
 void cargarTareas(ListaTask **Tareas, int cantidadTask);
 void mostrarTareas(ListaTask **Tareas, int cantidadTask);
 void marcarTareasRealizadas(ListaTask **TareasPendientes, ListaTask **TareasRealizadas, int cantidadTask);
+struct Tarea *BuscarTarea(ListaTask **Tareas, char *PalabraClave, int cantidadTask);
+void mostrarTarea(struct Tarea *tarea);
 
 void main (){
     int cantidadTask;
-    ListaTask **TareasPendientes, **TareasRealizadas;
+    ListaTask **TareasPendientes, **TareasRealizadas, *tarea;
     srand(time(NULL));
     printf("Ingrese la cantidad de tareas que desea cargar: ");
     scanf("%d", &cantidadTask);
@@ -31,6 +33,8 @@ void main (){
     mostrarTareas(TareasRealizadas, cantidadTask);
     printf("Tareas Pendientes: \n");
     mostrarTareas(TareasPendientes, cantidadTask);
+    tarea = BuscarTarea(TareasPendientes,"Comer",cantidadTask);
+    mostrarTarea(tarea);
 }
 
 void cargarTareas(ListaTask **Tareas, int cantidadTask){
@@ -86,5 +90,24 @@ void mostrarTareas(ListaTask **Tareas, int cantidadTask){
             printf("Duracion: %dmin\n\n", Tareas[i]->Duracion);
         }
     }
+}
+
+struct Tarea *BuscarTarea(ListaTask **Tareas, char *PalabraClave, int cantidadTask){
+    for(int i=0;i<cantidadTask;i++)
+    {
+        if(strcmp(Tareas[i]->Descripcion,PalabraClave)==0){
+            printf("\nTarea encontrada!\n");
+            return(Tareas[i]);
+        }
+    }
+    printf("\nNo encontrada! :c");
+    return NULL;
+}
+
+void mostrarTarea(struct Tarea *tarea){
+    printf("ID Tarea: %d",tarea->TareaID);
+    printf("\nDescripcion: ");
+    puts(tarea->Descripcion);
+    printf("Duracion: %dmin",tarea->Duracion);
 }
 
